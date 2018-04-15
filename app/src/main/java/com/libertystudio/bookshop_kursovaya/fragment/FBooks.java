@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya;
+package com.libertystudio.bookshop_kursovaya.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.libertystudio.bookshop_kursovaya.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Books.OnFragmentInteractionListener} interface
+ * {@link FBooks.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Books#newInstance} factory method to
+ * Use the {@link FBooks#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Books extends Fragment {
+public class FBooks extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class Books extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Books() {
+    public FBooks() {
         // Required empty public constructor
     }
 
@@ -39,11 +41,11 @@ public class Books extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Books.
+     * @return A new instance of fragment FBooks.
      */
     // TODO: Rename and change types and number of parameters
-    public static Books newInstance(String param1, String param2) {
-        Books fragment = new Books();
+    public static FBooks newInstance(String param1, String param2) {
+        FBooks fragment = new FBooks();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,12 +79,13 @@ public class Books extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        //Commented
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override

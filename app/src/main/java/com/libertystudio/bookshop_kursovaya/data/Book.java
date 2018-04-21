@@ -9,6 +9,14 @@ public class Book {
     private int year;
     private double price;
 
+    public Book(String title, Author author) {
+        this.title = title;
+        this.description = "Очень длинное описание сюжета книги";
+        this.author = author;
+        this.year = 1850;
+        this.price = 150;
+    }
+
     public String getTitle() {
         return title;
     }

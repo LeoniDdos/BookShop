@@ -11,15 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.libertystudio.bookshop_kursovaya.MainActivity;
 import com.libertystudio.bookshop_kursovaya.R;
-import com.libertystudio.bookshop_kursovaya.data.Author;
-import com.libertystudio.bookshop_kursovaya.data.Book;
 import com.libertystudio.bookshop_kursovaya.data.BookAdapter;
-
-import java.util.ArrayList;
 
 
 /**
@@ -43,9 +38,9 @@ public class FBooks extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private ListView lvBooks;
-    private ArrayList<Book> listBooks = new ArrayList<>();
     private BookAdapter bookAdapter;
 
+    private MainActivity mainActivity;
 
     public FBooks() {
         // Required empty public constructor
@@ -78,61 +73,33 @@ public class FBooks extends Fragment {
         }
     }
 
-    private void populateListView() {
-        System.out.println("BEGIN");
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_books, container, false);
+        lvBooks = view.findViewById(R.id.lv_books);
 
-        listBooks.add(new Book("Мастер и маргарита", new Author("Булгаков", "Михаил")));
-        listBooks.add(new Book("Война и мир", new Author("Толстой", "Лев")));
-        listBooks.add(new Book("Преступление и наказание", new Author("Достоевский", "Фёдор")));
-        listBooks.add(new Book("Анна Каренина", new Author("Толстой", "Лев")));
-        listBooks.add(new Book("Мёртвые души", new Author("Гоголь", "Николай")));
-        listBooks.add(new Book("Отцы и дети", new Author("Тургенев", "Иван")));
-        listBooks.add(new Book("Евгений Онегин", new Author("Пушкин", "Александр")));
-        listBooks.add(new Book("Герой нашего времени", new Author("Лермонтов", "Михаил")));
-        listBooks.add(new Book("Палата №6", new Author("Чехов", "Антон")));
-        listBooks.add(new Book("Обломов", new Author("Гончаров", "Иван")));
-        listBooks.add(new Book("Горе от ума", new Author("Грибоедов", "Александр")));
-        listBooks.add(new Book("Тихий Дон", new Author("Шолохов", "Михаил")));
-        listBooks.add(new Book("А зори здесь тихие", new Author("Васильев", "Борис")));
+        mainActivity = (MainActivity) getActivity();
 
-        bookAdapter = new BookAdapter(getActivity(), listBooks);
+        initListView();
+
+        return view;
+    }
+
+    private void initListView() {
+        bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBooks());
+        lvBooks.setAdapter(bookAdapter);
 
         lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "clicked: " + position, Toast.LENGTH_SHORT).show();
-
-                FragmentManager fragmentManager = getFragmentManager();
-
-                ((MainActivity)getActivity()).setSelectedBook(listBooks.get(position));
+                mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
 
                 Fragment fragmentBookInfo = new FBookInfo();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
-                getActivity().setTitle("О книге");
+                mainActivity.setTitle("О книге");
             }
         });
-
-        try {
-            lvBooks.setAdapter(bookAdapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //populateListView();
-
-        View view = inflater.inflate(R.layout.fragment_books, container, false);
-        lvBooks = view.findViewById(R.id.lv_books);
-
-        populateListView();
-
-        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

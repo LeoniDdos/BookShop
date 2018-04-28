@@ -23,18 +23,14 @@ import com.libertystudio.bookshop_kursovaya.fragment.FSearch;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    BottomNavigationView menuBottom;
-
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
     final Fragment fragmentBooks = new FBooks();
     final Fragment fragmentSearch = new FSearch();
     final Fragment fragmentBasket = new FBasket();
 
-    private ListView lvBooks;
     private ArrayList<Book> listBooks = new ArrayList<>();
-    private BookAdapter bookAdapter;
+    private ArrayList<Book> listBasketBooks = new ArrayList<>();
 
     private Book selectedBook;
 
@@ -43,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        menuBottom = findViewById(R.id.navigation);
+        BottomNavigationView menuBottom = findViewById(R.id.navigation);
         menuBottom.setSelectedItemId(R.id.action_home);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content, fragmentBooks).commit();
         setTitle("Книги");
+
+        initBookList();
 
         menuBottom.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -79,37 +77,33 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void populateListView() {
-        lvBooks = findViewById(R.id.lv_books);
-
-        listBooks.add(new Book("Мастер и маргарита", new Author("Булгаков", "Михаил")));
-        listBooks.add(new Book("Война и мир", new Author("Толстой", "Лев")));
-        listBooks.add(new Book("Преступление и наказание", new Author("Достоевский", "Фёдор")));
-        listBooks.add(new Book("Анна Каренина", new Author("Толстой", "Лев")));
-        listBooks.add(new Book("Мёртвые души", new Author("Гоголь", "Николай")));
-        listBooks.add(new Book("Отцы и дети", new Author("Тургенев", "Иван")));
-        listBooks.add(new Book("Евгений Онегин", new Author("Пушкин", "Александр")));
-        listBooks.add(new Book("Герой нашего времени", new Author("Лермонтов", "Михаил")));
-        listBooks.add(new Book("Палата №6", new Author("Чехов", "Антон")));
-        listBooks.add(new Book("Обломов", new Author("Гончаров", "Иван")));
-        listBooks.add(new Book("Горе от ума", new Author("Грибоедов", "Александр")));
-        listBooks.add(new Book("Тихий Дон", new Author("Шолохов", "Михаил")));
-        listBooks.add(new Book("А зори здесь тихие", new Author("Васильев", "Борис")));
-
-        bookAdapter = new BookAdapter(this, listBooks);
-
-        lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(MainActivity.this, "clicked: " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        try {
-            lvBooks.setAdapter(bookAdapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void initBookList() {
+        listBooks.add(new Book("Мастер и маргарита", new Author("Булгаков", "Михаил"),
+                "«Мастер и Маргарита» — роман Михаила Афанасьевича Булгакова, работа над которым началась в конце 1920-х годов и продолжалась вплоть до смерти писателя.", 1967, 400));
+        listBooks.add(new Book("Война и мир", new Author("Толстой", "Лев"),
+                "«Война и мир» — роман-эпопея Льва Николаевича Толстого, описывающий русское общество в эпоху войн против Наполеона в 1805—1812 годах.", 1867, 500));
+        listBooks.add(new Book("Преступление и наказание", new Author("Достоевский", "Фёдор"),
+                "«Преступление и наказание» — социально-психологический и социально-философский роман Фёдора Михайловича Достоевского, над которым писатель работал в 1865—1866 годах.", 1866, 350));
+        listBooks.add(new Book("Анна Каренина", new Author("Толстой", "Лев"),
+                "«Анна Каренина» — роман Льва Толстого о трагической любви замужней дамы Анны Карениной и блестящего офицера Вронского на фоне счастливой семейной жизни дворян Константина Лёвина и Кити Щербацкой.", 1877, 270));
+        listBooks.add(new Book("Мёртвые души", new Author("Гоголь", "Николай"),
+                "«Мёртвые души» — произведение Николая Васильевича Гоголя, жанр которого сам автор обозначил как поэму. Изначально задумано как трёхтомное произведение. Первый том был издан в 1842 году. Практически готовый второй том был уничтожен самим Гоголем, но сохранилось несколько глав в черновиках. Третий том был задуман и не начат, о нём остались только отдельные сведения.", 1842, 530));
+        listBooks.add(new Book("Отцы и дети", new Author("Тургенев", "Иван"),
+                "«Отцы и дети» — роман русского писателя Ивана Сергеевича Тургенева, написанный в 60-е годы XIX века. Роман стал знаковым для своего времени, а образ главного героя Евгения Базарова был воспринят молодёжью как пример для подражания. Такие идеалы как бескомпромиссность, отсутствие преклонения перед авторитетами и старыми истинами, приоритет полезного над прекрасным, были восприняты людьми того времени и нашли отражение в мировоззрении Базарова.", 1862, 200));
+        listBooks.add(new Book("Евгений Онегин", new Author("Пушкин", "Александр"),
+                "«Евгений Онегин» — роман в стихах русского поэта Александра Сергеевича Пушкина, одно из самых значительных произведений русской словесности.", 1832, 150));
+        listBooks.add(new Book("Герой нашего времени", new Author("Лермонтов", "Михаил"),
+                "«Герой нашего времени» — первый в русской прозе лирико-психологический роман, написанный Михаилом Юрьевичем Лермонтовым. Классика русской литературы.", 1840, 220));
+        listBooks.add(new Book("Палата №6", new Author("Чехов", "Антон"),
+                "«Палата № 6» — повесть Антона Павловича Чехова.", 1892, 190));
+        listBooks.add(new Book("Обломов", new Author("Гончаров", "Иван"),
+                "«Обломов» — роман, написанный русским писателем Иваном Александровичем Гончаровым. Роман входит в трилогию с произведениями «Обыкновенная история» и «Обрыв», являясь её второй частью.", 1859, 220));
+        listBooks.add(new Book("Горе от ума", new Author("Грибоедов", "Александр"),
+                "«Горе от ума» — комедия в стихах А. С. Грибоедова. Она сочетает в себе элементы классицизма и новых для начала XIX века романтизма и реализма. Она описывает светское общество времен крепостного права и показывает жизнь 1808—1824-х годов.", 1825, 340));
+        listBooks.add(new Book("Тихий Дон", new Author("Шолохов", "Михаил"),
+                "«Тихий Дон» — роман-эпопея Михаила Шолохова в четырёх томах. Одно из наиболее значительных произведений русской литературы XX века, рисующее широкую панораму жизни донского казачества во время Первой мировой войны, революционных событий 1917 года и Гражданской войны в России.", 1928, 410));
+        listBooks.add(new Book("А зори здесь тихие", new Author("Васильев", "Борис"),
+                "«А зори здесь тихие…» — произведение, написанное Борисом Васильевым, повествующее о судьбах пяти самоотверженных девушек-зенитчиц и их командира во время Великой Отечественной войны.", 1969, 120));
     }
 
     public Book getSelectedBook() {
@@ -118,5 +112,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setSelectedBook(Book selectedBook) {
         this.selectedBook = selectedBook;
+    }
+
+    public ArrayList<Book> getListBooks() {
+        return listBooks;
+    }
+
+    public ArrayList<Book> getListBasketBooks() {
+        return listBasketBooks;
     }
 }

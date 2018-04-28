@@ -4,11 +4,23 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.libertystudio.bookshop_kursovaya.MainActivity;
 import com.libertystudio.bookshop_kursovaya.R;
+import com.libertystudio.bookshop_kursovaya.data.Book;
+import com.libertystudio.bookshop_kursovaya.data.BookAdapter;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +41,15 @@ public class FSearch extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView etSearchTitle;
+    private Button btnSearch;
+
+    private BookAdapter bookAdapter;
+
+    private MainActivity mainActivity;
+
+    private ListView lvSearchBooks;
 
     public FSearch() {
         // Required empty public constructor
@@ -62,10 +83,62 @@ public class FSearch extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        etSearchTitle = view.findViewById(R.id.etSearchTitle);
+        btnSearch = view.findViewById(R.id.btnSearch);
+        lvSearchBooks = view.findViewById(R.id.lvSearchBooks);
+
+        mainActivity = (MainActivity) getActivity();
+
+        initSearch();
+
+        return view;
+    }
+
+    private void initSearch() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSearchTitle.setVisibility(View.INVISIBLE);
+                btnSearch.setVisibility(View.INVISIBLE);
+
+                ArrayList<Book> foundBooks = new ArrayList<>();
+
+                for (Book itrBook : mainActivity.getListBooks()) {
+                    if (etSearchTitle.getText().toString().equals(itrBook.getTitle())) {
+                        foundBooks.add(itrBook);
+                    }
+                }
+
+                BookAdapter bookAdapter = new BookAdapter(mainActivity, foundBooks);
+                lvSearchBooks.setAdapter(bookAdapter);
+
+                Toast.makeText(mainActivity, "Поиск завершён. Количество: " + foundBooks.size(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initListView() {
+        bookAdapter = new BookAdapter(getActivity(), mainActivity.getListBooks());
+
+        lvSearchBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
+
+                Fragment fragmentBookInfo = new FBookInfo();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
+                mainActivity.setTitle("О книге");
+            }
+        });
+
+        try {
+            lvSearchBooks.setAdapter(bookAdapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -7,7 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.libertystudio.bookshop_kursovaya.MainActivity;
 import com.libertystudio.bookshop_kursovaya.R;
@@ -34,7 +36,11 @@ public class FBookInfo extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private MainActivity mainActivity;
+
     private Book selectedBook;
+
+    private Button btnAddToBasket;
 
     public FBookInfo() {
         // Required empty public constructor
@@ -68,13 +74,14 @@ public class FBookInfo extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mainActivity = (MainActivity) getActivity();
 
-         selectedBook = ((MainActivity) getActivity()).getSelectedBook();
+        selectedBook = mainActivity.getSelectedBook();
 
         View view = inflater.inflate(R.layout.fragment_book_info, container, false);
+
+        btnAddToBasket = view.findViewById(R.id.btnAddToBasket);
 
         initInfo(view);
 
@@ -93,6 +100,14 @@ public class FBookInfo extends Fragment {
         tvYear.setText(String.valueOf(selectedBook.getYear()));
         tvDescription.setText(selectedBook.getDescription());
         tvPrice.setText(selectedBook.getPrice() + " рублей");
+
+        btnAddToBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.getListBasketBooks().add(mainActivity.getSelectedBook());
+                Toast.makeText(mainActivity, "Книга добавлена в корзину", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

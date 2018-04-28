@@ -4,17 +4,18 @@ import io.realm.RealmObject;
 
 public class Book {
     private String title;
-    private String description;
     private Author author;
+    private String description;
     private int year;
     private double price;
 
-    public Book(String title, Author author) {
+    
+    public Book(String title, Author author, String description, int year, double price) {
         this.title = title;
-        this.description = "Очень длинное описание сюжета книги";
         this.author = author;
-        this.year = 1850;
-        this.price = 150;
+        this.description = description;
+        this.year = year;
+        this.price = price;
     }
 
     public String getTitle() {

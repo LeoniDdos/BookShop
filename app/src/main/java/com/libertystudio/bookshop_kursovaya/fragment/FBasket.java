@@ -7,8 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.libertystudio.bookshop_kursovaya.MainActivity;
 import com.libertystudio.bookshop_kursovaya.R;
+import com.libertystudio.bookshop_kursovaya.data.Book;
+import com.libertystudio.bookshop_kursovaya.data.BookAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,13 @@ public class FBasket extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private MainActivity mainActivity;
+    private ListView lvBasketBooks;
+    private TextView tvSum;
+    private Button btnBuy;
+
+    private String strSum;
 
     public FBasket() {
         // Required empty public constructor
@@ -62,10 +76,41 @@ public class FBasket extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basket, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_basket, container, false);
+        lvBasketBooks = view.findViewById(R.id.lvBasketBooks);
+        tvSum = view.findViewById(R.id.tvSum);
+        btnBuy = view.findViewById(R.id.buttonBuy);
+
+        mainActivity = (MainActivity) getActivity();
+
+        BookAdapter bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBasketBooks());
+        lvBasketBooks.setAdapter(bookAdapter);
+
+        strSum = tvSum.getText().toString();
+
+        int sum = 0;
+
+        for (Book itrBook : mainActivity.getListBasketBooks()) {
+            sum += itrBook.getPrice();
+        }
+
+        tvSum.setText(strSum + String.valueOf(sum));
+
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show();
+                mainActivity.getListBasketBooks().clear();
+
+                tvSum.setText(strSum + "0");
+
+                BookAdapter bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBasketBooks());
+                lvBasketBooks.setAdapter(bookAdapter);
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

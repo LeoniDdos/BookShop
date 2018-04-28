@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,77 +8,105 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TableLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TableRow>
-            <TextView
-                android:text="Название:"
-                android:padding="3dip"
-                android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvInfoTitle"
-                android:padding="3dip"
-                android:text=""
-                android:textSize="18sp" />
-        </TableRow>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TableRow>
-            <TextView
-                android:text="Автор: "
-                android:padding="3dip"
-                android:textSize="18sp" />
-            <TextView
-                android:id="@+id/tvInfoAuthor"
-                android:padding="3dip"
-                android:text=""
-                android:textSize="18sp" />
-        </TableRow>
+                <TableRow>
 
-        <TableRow>
-            <TextView
-                android:text="Год: "
-                android:padding="3dip"
-                android:textSize="18sp" />
-            <TextView
-                android:id="@+id/tvInfoYear"
-                android:padding="3dip"
-                android:text=""
-                android:textSize="18sp" />
-        </TableRow>
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Название:"
+                        android:textSize="18sp" />
 
-        <TableRow>
-            <TextView
-                android:text="Описание: "
-                android:padding="3dip"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/tvInfoTitle"
+                        android:padding="3dip"
+                        android:text=""
+                        android:textSize="18sp" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/tvInfoDescription"
-                android:layout_weight="1"
-                android:padding="3dip"
-                android:text=""
-                android:textSize="17sp"
+                <TableRow>
 
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </TableRow>
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Автор: "
+                        android:textSize="18sp" />
 
-        <TableRow>
+                    <TextView
+                        android:id="@+id/tvInfoAuthor"
+                        android:padding="3dip"
+                        android:text=""
+                        android:textSize="18sp" />
+                </TableRow>
 
-            <TextView
-                android:padding="3dip"
-                android:text="Цена: "
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <TableRow>
 
-            <TextView
-                android:id="@+id/tvInfoPrice"
-                android:padding="3dip"
-                android:text=""
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </TableRow>
-    </TableLayout>
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Год: "
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvInfoYear"
+                        android:padding="3dip"
+                        android:text=""
+                        android:textSize="18sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Описание: "
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvInfoDescription"
+                        android:layout_weight="1"
+                        android:padding="3dip"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+
+                        android:textSize="17sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:padding="3dip"
+                        android:text="Цена: "
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvInfoPrice"
+                        android:padding="3dip"
+                        android:text=""
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAddToBasket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавить в корзину"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
 </FrameLayout>

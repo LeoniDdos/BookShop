@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,6 @@ public class FBasket extends Fragment {
     private TextView tvSum;
     private Button btnBuy;
 
-    private String strSum;
-
     public FBasket() {
         // Required empty public constructor
     }
@@ -78,39 +77,40 @@ public class FBasket extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basket, container, false);
-        lvBasketBooks = view.findViewById(R.id.lvBasketBooks);
-        tvSum = view.findViewById(R.id.tvSum);
-        btnBuy = view.findViewById(R.id.buttonBuy);
+        initElements(view);
 
+        return view;
+    }
+
+    private void initElements(View view) {
         mainActivity = (MainActivity) getActivity();
 
-        BookAdapter bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBasketBooks());
-        lvBasketBooks.setAdapter(bookAdapter);
+        lvBasketBooks = view.findViewById(R.id.lvBasketBooks);
+        lvBasketBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBasketBooks()));
 
-        strSum = tvSum.getText().toString();
+        tvSum = view.findViewById(R.id.tvSum);
+        tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
 
-        int sum = 0;
-
-        for (Book itrBook : mainActivity.getListBasketBooks()) {
-            sum += itrBook.getPrice();
-        }
-
-        tvSum.setText(strSum + String.valueOf(sum));
-
+        btnBuy = view.findViewById(R.id.buttonBuy);
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show();
-                mainActivity.getListBasketBooks().clear();
+//                Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show();
+//                mainActivity.getListBasketBooks().clear();
+//                lvBasketBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBasketBooks()));
+//                tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
 
-                tvSum.setText(strSum + "0");
-
-                BookAdapter bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBasketBooks());
-                lvBasketBooks.setAdapter(bookAdapter);
+                if (mainActivity.getListBasketBooks().size() > 0) {
+                    Fragment fragmentPurchase = new FPurchase();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content, fragmentPurchase).commit();
+                    mainActivity.setTitle("Успешная покупка");
+                }
+                else {
+                    Toast.makeText(mainActivity, "В корзине отсутствуют книги", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
-        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

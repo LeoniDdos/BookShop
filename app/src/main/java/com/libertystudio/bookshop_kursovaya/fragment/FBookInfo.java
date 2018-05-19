@@ -75,20 +75,16 @@ public class FBookInfo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainActivity = (MainActivity) getActivity();
-
-        selectedBook = mainActivity.getSelectedBook();
-
         View view = inflater.inflate(R.layout.fragment_book_info, container, false);
-
-        btnAddToBasket = view.findViewById(R.id.btnAddToBasket);
-
-        initInfo(view);
+        initElements(view);
 
         return view;
     }
 
-    private void initInfo(View view) {
+    private void initElements(View view) {
+        mainActivity = (MainActivity) getActivity();
+        selectedBook = mainActivity.getSelectedBook();
+
         TextView tvTitle = view.findViewById(R.id.tvInfoTitle);
         TextView tvAuthor = view.findViewById(R.id.tvInfoAuthor);
         TextView tvYear = view.findViewById(R.id.tvInfoYear);
@@ -101,6 +97,7 @@ public class FBookInfo extends Fragment {
         tvDescription.setText(selectedBook.getDescription());
         tvPrice.setText(selectedBook.getPrice() + " рублей");
 
+        btnAddToBasket = view.findViewById(R.id.btnAddToBasket);
         btnAddToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

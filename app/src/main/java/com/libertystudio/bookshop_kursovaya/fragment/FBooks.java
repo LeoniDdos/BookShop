@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +37,6 @@ public class FBooks extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private ListView lvBooks;
-    private BookAdapter bookAdapter;
 
     private MainActivity mainActivity;
 
@@ -76,28 +74,25 @@ public class FBooks extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_books, container, false);
-        lvBooks = view.findViewById(R.id.lv_books);
-
-        mainActivity = (MainActivity) getActivity();
-
-        initListView();
+        initElements(view);
 
         return view;
     }
 
-    private void initListView() {
-        bookAdapter = new BookAdapter(mainActivity, mainActivity.getListBooks());
-        lvBooks.setAdapter(bookAdapter);
+    private void initElements(View view) {
+        mainActivity = (MainActivity) getActivity();
 
+        lvBooks = view.findViewById(R.id.lv_books);
+        lvBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBooks()));
         lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
+                mainActivity.setTitle("О книге");
 
                 Fragment fragmentBookInfo = new FBookInfo();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
-                mainActivity.setTitle("О книге");
             }
         });
     }

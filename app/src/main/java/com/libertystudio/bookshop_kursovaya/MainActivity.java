@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                                 case R.id.action_home:
                                     fragmentTransaction.replace(R.id.content, fragmentBooks).commit();
                                     setTitle("Книги");
-//                                    populateListView();
                                     return true;
                                 case R.id.action_search:
                                     fragmentTransaction.replace(R.id.content, fragmentSearch).commit();
@@ -104,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
                 "«Тихий Дон» — роман-эпопея Михаила Шолохова в четырёх томах. Одно из наиболее значительных произведений русской литературы XX века, рисующее широкую панораму жизни донского казачества во время Первой мировой войны, революционных событий 1917 года и Гражданской войны в России.", 1928, 410));
         listBooks.add(new Book("А зори здесь тихие", new Author("Васильев", "Борис"),
                 "«А зори здесь тихие…» — произведение, написанное Борисом Васильевым, повествующее о судьбах пяти самоотверженных девушек-зенитчиц и их командира во время Великой Отечественной войны.", 1969, 120));
+    }
+
+    public int getBasketSum() {
+        int sum = 0;
+
+        for (Book itrBook : listBasketBooks) {
+            sum += itrBook.getPrice();
+        }
+
+        return sum;
     }
 
     public Book getSelectedBook() {

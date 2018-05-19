@@ -13,15 +13,12 @@ import com.libertystudio.bookshop_kursovaya.R;
 import java.util.ArrayList;
 
 public class BookAdapter extends BaseAdapter {
-    //private Activity context;
     private ArrayList<Book> books;
     private static LayoutInflater inflater = null;
 
     public BookAdapter(Activity context, ArrayList<Book> books) {
-        //this.context = context;
         this.books = books;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -44,8 +41,11 @@ public class BookAdapter extends BaseAdapter {
         View itemView = convertView;
         itemView = (itemView == null) ? inflater.inflate(R.layout.list_item, null) : itemView;
         TextView tvTitle = itemView.findViewById(R.id.textViewTitle);
+        TextView tvPrice = itemView.findViewById(R.id.textViewPrice);
         Book selectedBook = books.get(position);
         tvTitle.setText(selectedBook.getTitle() + " (" + selectedBook.getAuthor().getSurname() + " " + selectedBook.getAuthor().getName().substring(0,1) + ".)");
+        tvPrice.setText(String.valueOf(selectedBook.getPrice()) + " руб.");
+
         return itemView;
     }
 }

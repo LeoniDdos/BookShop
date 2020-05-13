@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya.fragment;
+package com.libertystudio.bookshop.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,10 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.libertystudio.bookshop_kursovaya.MainActivity;
-import com.libertystudio.bookshop_kursovaya.R;
-import com.libertystudio.bookshop_kursovaya.data.Book;
-import com.libertystudio.bookshop_kursovaya.data.BookAdapter;
+import com.libertystudio.bookshop.MainActivity;
+import com.libertystudio.bookshop.R;
+import com.libertystudio.bookshop.data.Book;
+import com.libertystudio.bookshop.data.BookAdapter;
 
 import java.util.ArrayList;
 

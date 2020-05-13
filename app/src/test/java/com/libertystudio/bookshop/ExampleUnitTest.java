@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya;
+package com.libertystudio.bookshop;
 
 import org.junit.Test;
 

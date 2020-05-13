@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya;
+package com.libertystudio.bookshop;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

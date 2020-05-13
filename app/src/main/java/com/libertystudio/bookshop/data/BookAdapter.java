@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya.data;
+package com.libertystudio.bookshop.data;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.libertystudio.bookshop_kursovaya.R;
+import com.libertystudio.bookshop.R;
 
 import java.util.ArrayList;
 

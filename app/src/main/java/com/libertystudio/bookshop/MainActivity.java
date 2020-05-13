@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya;
+package com.libertystudio.bookshop;
 
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.libertystudio.bookshop_kursovaya.data.Author;
-import com.libertystudio.bookshop_kursovaya.data.Book;
-import com.libertystudio.bookshop_kursovaya.fragment.FBasket;
-import com.libertystudio.bookshop_kursovaya.fragment.FBooks;
-import com.libertystudio.bookshop_kursovaya.fragment.FSearch;
+import com.libertystudio.bookshop.data.Author;
+import com.libertystudio.bookshop.data.Book;
+import com.libertystudio.bookshop.fragment.FBasket;
+import com.libertystudio.bookshop.fragment.FBooks;
+import com.libertystudio.bookshop.fragment.FSearch;
 
 import java.util.ArrayList;
 

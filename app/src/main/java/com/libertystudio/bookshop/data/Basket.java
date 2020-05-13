@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop_kursovaya.data;
+package com.libertystudio.bookshop.data;
 
 import java.util.ArrayList;
 

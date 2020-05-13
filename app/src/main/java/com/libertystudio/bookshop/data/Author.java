@@ -1,6 +1,4 @@
-package com.libertystudio.bookshop_kursovaya.data;
-
-import io.realm.RealmObject;
+package com.libertystudio.bookshop.data;
 
 public class Author {
     private String surname;

@@ -1,21 +1,16 @@
 package com.libertystudio.bookshop_kursovaya;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.libertystudio.bookshop_kursovaya.data.Author;
 import com.libertystudio.bookshop_kursovaya.data.Book;
-import com.libertystudio.bookshop_kursovaya.data.BookAdapter;
 import com.libertystudio.bookshop_kursovaya.fragment.FBasket;
 import com.libertystudio.bookshop_kursovaya.fragment.FBooks;
 import com.libertystudio.bookshop_kursovaya.fragment.FSearch;

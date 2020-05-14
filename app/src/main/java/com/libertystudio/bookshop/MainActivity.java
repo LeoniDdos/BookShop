@@ -11,18 +11,18 @@ import android.view.MenuItem;
 
 import com.libertystudio.bookshop.data.Author;
 import com.libertystudio.bookshop.data.Book;
-import com.libertystudio.bookshop.fragment.FBasket;
-import com.libertystudio.bookshop.fragment.FBooks;
-import com.libertystudio.bookshop.fragment.FSearch;
+import com.libertystudio.bookshop.fragment.BasketFragment;
+import com.libertystudio.bookshop.fragment.BooksFragment;
+import com.libertystudio.bookshop.fragment.SearchFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
-    final Fragment fragmentBooks = new FBooks();
-    final Fragment fragmentSearch = new FSearch();
-    final Fragment fragmentBasket = new FBasket();
+    final Fragment fragmentBooks = new BooksFragment();
+    final Fragment fragmentSearch = new SearchFragment();
+    final Fragment fragmentBasket = new BasketFragment();
 
     private ArrayList<Book> listBooks = new ArrayList<>();
     private ArrayList<Book> listBasketBooks = new ArrayList<>();

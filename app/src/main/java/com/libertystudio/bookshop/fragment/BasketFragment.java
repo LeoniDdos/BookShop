@@ -4,27 +4,28 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
-import com.libertystudio.bookshop.data.Book;
-
+import com.libertystudio.bookshop.data.BookAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FBookInfo.OnFragmentInteractionListener} interface
+ * {@link BasketFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FBookInfo#newInstance} factory method to
+ * Use the {@link BasketFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FBookInfo extends Fragment {
+public class BasketFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,12 +38,11 @@ public class FBookInfo extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private MainActivity mainActivity;
+    private ListView lvBasketBooks;
+    private TextView tvSum;
+    private Button btnBuy;
 
-    private Book selectedBook;
-
-    private Button btnAddToBasket;
-
-    public FBookInfo() {
+    public BasketFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +52,11 @@ public class FBookInfo extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FBookInfo.
+     * @return A new instance of fragment BasketFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FBookInfo newInstance(String param1, String param2) {
-        FBookInfo fragment = new FBookInfo();
+    public static BasketFragment newInstance(String param1, String param2) {
+        BasketFragment fragment = new BasketFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,7 +75,7 @@ public class FBookInfo extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_basket, container, false);
         initElements(view);
 
         return view;
@@ -83,26 +83,31 @@ public class FBookInfo extends Fragment {
 
     private void initElements(View view) {
         mainActivity = (MainActivity) getActivity();
-        selectedBook = mainActivity.getSelectedBook();
 
-        TextView tvTitle = view.findViewById(R.id.tvInfoTitle);
-        TextView tvAuthor = view.findViewById(R.id.tvInfoAuthor);
-        TextView tvYear = view.findViewById(R.id.tvInfoYear);
-        TextView tvDescription = view.findViewById(R.id.tvInfoDescription);
-        TextView tvPrice = view.findViewById(R.id.tvInfoPrice);
+        lvBasketBooks = view.findViewById(R.id.lvBasketBooks);
+        lvBasketBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBasketBooks()));
 
-        tvTitle.setText(selectedBook.getTitle());
-        tvAuthor.setText(selectedBook.getAuthor().getName() + " " + selectedBook.getAuthor().getSurname());
-        tvYear.setText(String.valueOf(selectedBook.getYear()));
-        tvDescription.setText(selectedBook.getDescription());
-        tvPrice.setText(selectedBook.getPrice() + " рублей");
+        tvSum = view.findViewById(R.id.tvSum);
+        tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
 
-        btnAddToBasket = view.findViewById(R.id.btnAddToBasket);
-        btnAddToBasket.setOnClickListener(new View.OnClickListener() {
+        btnBuy = view.findViewById(R.id.buttonBuy);
+        btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.getListBasketBooks().add(mainActivity.getSelectedBook());
-                Toast.makeText(mainActivity, "Книга добавлена в корзину", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show();
+//                mainActivity.getListBasketBooks().clear();
+//                lvBasketBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBasketBooks()));
+//                tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
+
+                if (mainActivity.getListBasketBooks().size() > 0) {
+                    Fragment fragmentPurchase = new PurchaseFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.content, fragmentPurchase).commit();
+                    mainActivity.setTitle("Успешная покупка");
+                }
+                else {
+                    Toast.makeText(mainActivity, "В корзине отсутствуют книги", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

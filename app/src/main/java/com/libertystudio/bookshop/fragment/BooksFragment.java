@@ -4,23 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
+import com.libertystudio.bookshop.data.BookAdapter;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FPurchase.OnFragmentInteractionListener} interface
+ * {@link BooksFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FPurchase#newInstance} factory method to
+ * Use the {@link BooksFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FPurchase extends Fragment {
+public class BooksFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,9 +36,11 @@ public class FPurchase extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private ListView lvBooks;
+
     private MainActivity mainActivity;
 
-    public FPurchase() {
+    public BooksFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +50,11 @@ public class FPurchase extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FPurchase.
+     * @return A new instance of fragment BooksFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FPurchase newInstance(String param1, String param2) {
-        FPurchase fragment = new FPurchase();
+    public static BooksFragment newInstance(String param1, String param2) {
+        BooksFragment fragment = new BooksFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +73,7 @@ public class FPurchase extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_purchase, container, false);
+        View view = inflater.inflate(R.layout.fragment_books, container, false);
         initElements(view);
 
         return view;
@@ -76,13 +82,19 @@ public class FPurchase extends Fragment {
     private void initElements(View view) {
         mainActivity = (MainActivity) getActivity();
 
-        TextView tvBooksCount = view.findViewById(R.id.tvBooksCount);
-        TextView tvSum = view.findViewById(R.id.tvSum);
+        lvBooks = view.findViewById(R.id.lv_books);
+        lvBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBooks()));
+        lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
+                mainActivity.setTitle("О книге");
 
-        tvBooksCount.setText(String.valueOf(mainActivity.getListBasketBooks().size()));
-        tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
-
-        mainActivity.getListBasketBooks().clear();
+                Fragment fragmentBookInfo = new BookInfoFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,12 +107,13 @@ public class FPurchase extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //Commented
 //        if (context instanceof OnFragmentInteractionListener) {
-////            mListener = (OnFragmentInteractionListener) context;
-////        } else {
-////            throw new RuntimeException(context.toString()
-////                    + " must implement OnFragmentInteractionListener");
-////        }
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override

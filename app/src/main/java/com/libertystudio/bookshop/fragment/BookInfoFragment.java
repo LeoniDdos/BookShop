@@ -4,27 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
-import com.libertystudio.bookshop.data.BookAdapter;
+import com.libertystudio.bookshop.data.Book;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FBooks.OnFragmentInteractionListener} interface
+ * {@link BookInfoFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FBooks#newInstance} factory method to
+ * Use the {@link BookInfoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FBooks extends Fragment {
+public class BookInfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,11 +36,13 @@ public class FBooks extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private ListView lvBooks;
-
     private MainActivity mainActivity;
 
-    public FBooks() {
+    private Book selectedBook;
+
+    private Button btnAddToBasket;
+
+    public BookInfoFragment() {
         // Required empty public constructor
     }
 
@@ -50,11 +52,11 @@ public class FBooks extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FBooks.
+     * @return A new instance of fragment BookInfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FBooks newInstance(String param1, String param2) {
-        FBooks fragment = new FBooks();
+    public static BookInfoFragment newInstance(String param1, String param2) {
+        BookInfoFragment fragment = new BookInfoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,7 +75,7 @@ public class FBooks extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_books, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_info, container, false);
         initElements(view);
 
         return view;
@@ -81,18 +83,26 @@ public class FBooks extends Fragment {
 
     private void initElements(View view) {
         mainActivity = (MainActivity) getActivity();
+        selectedBook = mainActivity.getSelectedBook();
 
-        lvBooks = view.findViewById(R.id.lv_books);
-        lvBooks.setAdapter(new BookAdapter(mainActivity, mainActivity.getListBooks()));
-        lvBooks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        TextView tvTitle = view.findViewById(R.id.tvInfoTitle);
+        TextView tvAuthor = view.findViewById(R.id.tvInfoAuthor);
+        TextView tvYear = view.findViewById(R.id.tvInfoYear);
+        TextView tvDescription = view.findViewById(R.id.tvInfoDescription);
+        TextView tvPrice = view.findViewById(R.id.tvInfoPrice);
+
+        tvTitle.setText(selectedBook.getTitle());
+        tvAuthor.setText(selectedBook.getAuthor().getName() + " " + selectedBook.getAuthor().getSurname());
+        tvYear.setText(String.valueOf(selectedBook.getYear()));
+        tvDescription.setText(selectedBook.getDescription());
+        tvPrice.setText(selectedBook.getPrice() + " рублей");
+
+        btnAddToBasket = view.findViewById(R.id.btnAddToBasket);
+        btnAddToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
-                mainActivity.setTitle("О книге");
-
-                Fragment fragmentBookInfo = new FBookInfo();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
+            public void onClick(View v) {
+                mainActivity.getListBasketBooks().add(mainActivity.getSelectedBook());
+                Toast.makeText(mainActivity, "Книга добавлена в корзину", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -107,7 +117,6 @@ public class FBooks extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //Commented
 //        if (context instanceof OnFragmentInteractionListener) {
 //            mListener = (OnFragmentInteractionListener) context;
 //        } else {

@@ -24,12 +24,12 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FSearch.OnFragmentInteractionListener} interface
+ * {@link SearchFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FSearch#newInstance} factory method to
+ * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FSearch extends Fragment {
+public class SearchFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -50,7 +50,7 @@ public class FSearch extends Fragment {
 
     private ListView lvSearchBooks;
 
-    public FSearch() {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -60,11 +60,11 @@ public class FSearch extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FSearch.
+     * @return A new instance of fragment SearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FSearch newInstance(String param1, String param2) {
-        FSearch fragment = new FSearch();
+    public static SearchFragment newInstance(String param1, String param2) {
+        SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -126,7 +126,7 @@ public class FSearch extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
 
-                Fragment fragmentBookInfo = new FBookInfo();
+                Fragment fragmentBookInfo = new BookInfoFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
                 mainActivity.setTitle("О книге");

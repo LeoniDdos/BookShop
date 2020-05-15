@@ -23,10 +23,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        initBottomBar()
+
+        setMockBookList()
+    }
+
+    private fun initBottomBar() {
         val menuBottom = findViewById<BottomNavigationView>(R.id.bottomBar)
         menuBottom.selectedItemId = R.id.action_home
         startFragment(fragmentBooks)
-        initBookList()
+
         menuBottom.setOnNavigationItemSelectedListener(
                 BottomNavigationView.OnNavigationItemSelectedListener { item ->
                     when (item.itemId) {
@@ -47,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
-    private fun initBookList() {
+    private fun setMockBookList() {
         listBooks.add(Book("Мастер и маргарита", Author("Булгаков", "Михаил"),
                 "«Мастер и Маргарита» — роман Михаила Афанасьевича Булгакова, работа над которым началась в конце 1920-х годов и продолжалась вплоть до смерти писателя.", 1967, 400.0))
         listBooks.add(Book("Война и мир", Author("Толстой", "Лев"),

@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 
-public class PurchaseFragment extends Fragment {
+public class PurchaseFragment extends BaseFragment {
     private MainActivity mainActivity;
 
     public PurchaseFragment() { }

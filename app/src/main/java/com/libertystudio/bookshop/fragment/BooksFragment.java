@@ -14,7 +14,7 @@ import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.BookAdapter;
 
-public class BooksFragment extends Fragment {
+public class BooksFragment extends BaseFragment {
     private ListView lvBooks;
 
     private MainActivity mainActivity;

@@ -16,7 +16,7 @@ import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.BookAdapter;
 
-public class BasketFragment extends Fragment {
+public class BasketFragment extends BaseFragment {
     private MainActivity mainActivity;
     private ListView lvBasketBooks;
     private TextView tvSum;

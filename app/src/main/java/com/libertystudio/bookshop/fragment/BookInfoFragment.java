@@ -8,13 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.Book;
 
-public class BookInfoFragment extends Fragment {
+public class BookInfoFragment extends BaseFragment {
     private MainActivity mainActivity;
 
     private Book selectedBook;

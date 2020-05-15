@@ -20,7 +20,7 @@ import com.libertystudio.bookshop.data.BookAdapter;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseFragment {
     private TextView etSearchTitle;
     private Button btnSearch;
 

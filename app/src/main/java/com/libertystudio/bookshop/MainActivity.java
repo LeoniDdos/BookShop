@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView menuBottom = findViewById(R.id.navigation);
+        BottomNavigationView menuBottom = findViewById(R.id.bottomBar);
         menuBottom.setSelectedItemId(R.id.action_home);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

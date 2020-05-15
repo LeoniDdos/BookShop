@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
-import com.libertystudio.bookshop.data.BookAdapter;
+import com.libertystudio.bookshop.entity.BookAdapter;
 
 public class BooksFragment extends BaseFragment {
     private ListView lvBooks;

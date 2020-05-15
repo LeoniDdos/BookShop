@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop.data;
+package com.libertystudio.bookshop.entity;
 
 public class Author {
     private String surname;

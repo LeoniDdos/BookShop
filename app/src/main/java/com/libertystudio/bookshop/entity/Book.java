@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop.data;
+package com.libertystudio.bookshop.entity;
 
 public class Book {
     private String title;

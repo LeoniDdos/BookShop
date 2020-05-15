@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.libertystudio.bookshop.data.Author;
-import com.libertystudio.bookshop.data.Book;
+import com.libertystudio.bookshop.entity.Author;
+import com.libertystudio.bookshop.entity.Book;
 import com.libertystudio.bookshop.fragment.BasketFragment;
 import com.libertystudio.bookshop.fragment.BooksFragment;
 import com.libertystudio.bookshop.fragment.SearchFragment;

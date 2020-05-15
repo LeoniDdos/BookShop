@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
-import com.libertystudio.bookshop.data.Book;
+import com.libertystudio.bookshop.entity.Book;
 
 public class BookInfoFragment extends BaseFragment {
     private MainActivity mainActivity;

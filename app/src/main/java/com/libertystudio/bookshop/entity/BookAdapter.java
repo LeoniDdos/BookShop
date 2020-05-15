@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop.data;
+package com.libertystudio.bookshop.entity;
 
 import android.app.Activity;
 import android.content.Context;

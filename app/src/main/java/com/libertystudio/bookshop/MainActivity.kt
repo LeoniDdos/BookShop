@@ -80,10 +80,10 @@ class MainActivity : AppCompatActivity() {
                 "«А зори здесь тихие…» — произведение, написанное Борисом Васильевым, повествующее о судьбах пяти самоотверженных девушек-зенитчиц и их командира во время Великой Отечественной войны.", 1969, 120.0))
     }
 
-    fun startFragment(fragment: Fragment?) {
+    fun startFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction
-                .replace(R.id.fragmentContainer, fragment!!)
+                .replace(R.id.fragmentContainer, fragment)
                 .commit()
     }
 

@@ -1,4 +1,6 @@
-package com.libertystudio.bookshop.entity;
+package com.libertystudio.bookshop;
+
+import com.libertystudio.bookshop.entity.Book;
 
 import java.util.ArrayList;
 

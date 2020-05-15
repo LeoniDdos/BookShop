@@ -1,4 +1,4 @@
-package com.libertystudio.bookshop.entity;
+package com.libertystudio.bookshop.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.libertystudio.bookshop.R;
+import com.libertystudio.bookshop.entity.Book;
 
 import java.util.ArrayList;
 

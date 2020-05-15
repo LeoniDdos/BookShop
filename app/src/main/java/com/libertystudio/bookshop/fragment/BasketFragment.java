@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
-import com.libertystudio.bookshop.entity.BookAdapter;
+import com.libertystudio.bookshop.adapter.BookAdapter;
 
 public class BasketFragment extends BaseFragment {
     private MainActivity mainActivity;

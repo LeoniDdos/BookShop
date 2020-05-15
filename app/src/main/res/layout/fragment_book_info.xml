@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BookInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,7 +27,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tvInfoTitle"
+                        android:id="@+id/tvBookInfoTitle"
                         android:padding="3dip"
                         android:text=""
                         android:textSize="18sp" />
@@ -43,7 +41,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tvInfoAuthor"
+                        android:id="@+id/tvBookInfoAuthor"
                         android:padding="3dip"
                         android:text=""
                         android:textSize="18sp" />
@@ -57,7 +55,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tvInfoYear"
+                        android:id="@+id/tvBookInfoYear"
                         android:padding="3dip"
                         android:text=""
                         android:textSize="18sp" />
@@ -71,7 +69,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tvInfoDescription"
+                        android:id="@+id/tvBookInfoDescription"
                         android:layout_weight="1"
                         android:padding="3dip"
                         android:text=""
@@ -89,7 +87,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvInfoPrice"
+                        android:id="@+id/tvBookInfoPrice"
                         android:padding="3dip"
                         android:text=""
                         android:textSize="18sp"
@@ -101,7 +99,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnAddToBasket"
+            android:id="@+id/btnBookInfoAddToBasket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Добавить в корзину"

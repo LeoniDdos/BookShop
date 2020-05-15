@@ -4,28 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.libertystudio.bookshop.MainActivity
 import com.libertystudio.bookshop.R
+import kotlinx.android.synthetic.main.fragment_purchase.*
 
 class PurchaseFragment : BaseFragment() {
     private var mainActivity: MainActivity? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_purchase, container, false)
-        initElements(view)
-        return view
+        return inflater.inflate(R.layout.fragment_purchase, container, false)
     }
 
-    private fun initElements(view: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initView()
+    }
+
+    private fun initView() {
         setTitle("Успешная покупка")
 
         mainActivity = activity as MainActivity?
 
-        val tvBooksCount = view.findViewById<TextView>(R.id.tvBooksCount)
-        val tvSum = view.findViewById<TextView>(R.id.tvSum)
-
-        tvBooksCount.text = mainActivity!!.listBasketBooks.size.toString()
-        tvSum.text = mainActivity!!.basketSum.toString() + " руб."
+        tvPurchaseBooksCount.text = mainActivity!!.listBasketBooks.size.toString()
+        tvPurchaseSum.text = mainActivity!!.basketSum.toString() + " руб."
 
         mainActivity!!.listBasketBooks.clear()
     }

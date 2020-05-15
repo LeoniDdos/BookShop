@@ -17,6 +17,8 @@ class PurchaseFragment : BaseFragment() {
     }
 
     private fun initElements(view: View) {
+        setTitle("Успешная покупка")
+
         mainActivity = activity as MainActivity?
 
         val tvBooksCount = view.findViewById<TextView>(R.id.tvBooksCount)

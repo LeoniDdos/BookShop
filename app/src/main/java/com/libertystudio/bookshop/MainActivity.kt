@@ -26,24 +26,20 @@ class MainActivity : AppCompatActivity() {
         val menuBottom = findViewById<BottomNavigationView>(R.id.bottomBar)
         menuBottom.selectedItemId = R.id.action_home
         startFragment(fragmentBooks)
-        title = "Книги"
         initBookList()
         menuBottom.setOnNavigationItemSelectedListener(
                 BottomNavigationView.OnNavigationItemSelectedListener { item ->
                     when (item.itemId) {
                         R.id.action_home -> {
                             startFragment(fragmentBooks)
-                            title = "Книги"
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.action_search -> {
                             startFragment(fragmentSearch)
-                            title = "Поиск"
                             return@OnNavigationItemSelectedListener true
                         }
                         R.id.action_basket -> {
                             startFragment(fragmentBasket)
-                            title = "Корзина"
                             return@OnNavigationItemSelectedListener true
                         }
                     }
@@ -85,6 +81,10 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction
                 .replace(R.id.fragmentContainer, fragment)
                 .commit()
+    }
+
+    fun setTitle(title: String) {
+        this.title = title
     }
 
     val basketSum: Int

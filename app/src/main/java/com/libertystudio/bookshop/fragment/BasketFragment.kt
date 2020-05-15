@@ -25,6 +25,8 @@ class BasketFragment : BaseFragment() {
     }
 
     private fun initElements(view: View) {
+        setTitle("Корзина")
+
         mainActivity = activity as MainActivity?
         lvBasketBooks = view.findViewById(R.id.lvBasketBooks)
         lvBasketBooks?.setAdapter(BookAdapter(mainActivity, mainActivity!!.listBasketBooks))
@@ -37,7 +39,6 @@ class BasketFragment : BaseFragment() {
 //                tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
             if (mainActivity!!.listBasketBooks.size > 0) {
                 startFragment(PurchaseFragment())
-                mainActivity!!.title = "Успешная покупка"
             } else {
                 Toast.makeText(mainActivity, "В корзине отсутствуют книги", Toast.LENGTH_SHORT).show()
             }

@@ -23,6 +23,8 @@ class BookInfoFragment : BaseFragment() {
     }
 
     private fun initElements(view: View) {
+        setTitle("О книге")
+
         mainActivity = activity as MainActivity?
         selectedBook = mainActivity!!.selectedBook
 

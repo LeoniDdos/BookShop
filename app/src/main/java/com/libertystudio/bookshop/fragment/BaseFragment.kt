@@ -5,8 +5,14 @@ import com.libertystudio.bookshop.MainActivity
 
 open class BaseFragment : Fragment() {
     fun startFragment(fragment: Fragment) {
-        activity?.let {
-            (it as MainActivity).startFragment(fragment)
-        }
+        getMainActivity().startFragment(fragment)
+    }
+
+    fun setTitle(title: String) {
+        getMainActivity().setTitle(title)
+    }
+
+    private fun getMainActivity(): MainActivity {
+        return requireActivity() as MainActivity
     }
 }

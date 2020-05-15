@@ -28,6 +28,8 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initElements(view: View) {
+        setTitle("Поиск")
+
         mainActivity = activity as MainActivity?
         etSearchTitle = view.findViewById(R.id.etSearchTitle)
         btnSearch = view.findViewById(R.id.btnSearch)
@@ -52,7 +54,6 @@ class SearchFragment : BaseFragment() {
         lvSearchBooks!!.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             mainActivity!!.selectedBook = mainActivity!!.listBooks[position]
             startFragment(BookInfoFragment())
-            mainActivity!!.title = "О книге"
         }
         try {
             lvSearchBooks!!.adapter = bookAdapter

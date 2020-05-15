@@ -20,12 +20,13 @@ class BooksFragment : BaseFragment() {
     }
 
     private fun initElements(view: View) {
+        setTitle("Книги")
+
         mainActivity = activity as MainActivity?
         lvBooks = view.findViewById(R.id.lv_books)
         lvBooks?.setAdapter(BookAdapter(mainActivity, mainActivity!!.listBooks))
         lvBooks?.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             mainActivity!!.selectedBook = mainActivity!!.listBooks[position]
-            mainActivity!!.title = "О книге"
             startFragment(BookInfoFragment())
         })
     }

@@ -27,7 +27,7 @@ class BasketFragment : BaseFragment() {
         setTitle("Корзина")
 
         mainActivity = activity as MainActivity?
-        lvBasketBooks?.adapter = BookAdapter(mainActivity, mainActivity!!.listBasketBooks)
+        lvBasketBooks?.adapter = BookAdapter(context!!, mainActivity!!.listBasketBooks)
         tvBasketSum?.text = mainActivity!!.basketSum.toString() + " руб."
         btnBasketBuy?.setOnClickListener {
 //            Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show()

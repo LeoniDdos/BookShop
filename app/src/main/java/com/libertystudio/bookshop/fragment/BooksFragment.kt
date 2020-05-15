@@ -26,7 +26,7 @@ class BooksFragment : BaseFragment() {
         setTitle("Книги")
 
         mainActivity = activity as MainActivity?
-        lvBooks?.adapter = BookAdapter(mainActivity, mainActivity!!.listBooks)
+        lvBooks?.adapter = BookAdapter(context!!, mainActivity!!.listBooks)
         lvBooks?.onItemClickListener = OnItemClickListener { _, _, position, _ ->
             mainActivity!!.selectedBook = mainActivity!!.listBooks[position]
             startFragment(BookInfoFragment())

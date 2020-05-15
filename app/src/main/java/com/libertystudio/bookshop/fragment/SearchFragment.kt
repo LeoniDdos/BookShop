@@ -40,14 +40,14 @@ class SearchFragment : BaseFragment() {
                     foundBooks.add(itrBook)
                 }
             }
-            val bookAdapter = BookAdapter(mainActivity, foundBooks)
+            val bookAdapter = BookAdapter(context!!, foundBooks)
             lvSearchBooks?.adapter = bookAdapter
             Toast.makeText(mainActivity, "Поиск завершён. Количество: " + foundBooks.size, Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initListView() {
-        bookAdapter = BookAdapter(activity, mainActivity!!.listBooks)
+        bookAdapter = BookAdapter(context!!, mainActivity!!.listBooks)
         lvSearchBooks!!.onItemClickListener = OnItemClickListener { _, _, position, _ ->
             mainActivity!!.selectedBook = mainActivity!!.listBooks[position]
             startFragment(BookInfoFragment())

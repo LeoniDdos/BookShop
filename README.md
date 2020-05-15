@@ -1,4 +1,3 @@
 # BookShop
 
-**Language:**
-- Java 100%
+**Language:** Kotlin (100%)

@@ -1,14 +1,14 @@
 package com.libertystudio.bookshop;
 
-import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.libertystudio.bookshop.data.Author;
 import com.libertystudio.bookshop.data.Book;
 import com.libertystudio.bookshop.fragment.BasketFragment;
@@ -18,8 +18,6 @@ import com.libertystudio.bookshop.fragment.SearchFragment;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    final FragmentManager fragmentManager = getSupportFragmentManager();
-
     final Fragment fragmentBooks = new BooksFragment();
     final Fragment fragmentSearch = new SearchFragment();
     final Fragment fragmentBasket = new BasketFragment();
@@ -37,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView menuBottom = findViewById(R.id.bottomBar);
         menuBottom.setSelectedItemId(R.id.action_home);
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content, fragmentBooks).commit();
+        startFragment(fragmentBooks);
+
         setTitle("Книги");
 
         initBookList();
@@ -47,24 +45,19 @@ public class MainActivity extends AppCompatActivity {
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        try {
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            switch (item.getItemId()) {
-                                case R.id.action_home:
-                                    fragmentTransaction.replace(R.id.content, fragmentBooks).commit();
-                                    setTitle("Книги");
-                                    return true;
-                                case R.id.action_search:
-                                    fragmentTransaction.replace(R.id.content, fragmentSearch).commit();
-                                    setTitle("Поиск");
-                                    return true;
-                                case R.id.action_basket:
-                                    fragmentTransaction.replace(R.id.content, fragmentBasket).commit();
-                                    setTitle("Корзина");
-                                    return true;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                startFragment(fragmentBooks);
+                                setTitle("Книги");
+                                return true;
+                            case R.id.action_search:
+                                startFragment(fragmentSearch);
+                                setTitle("Поиск");
+                                return true;
+                            case R.id.action_basket:
+                                startFragment(fragmentBasket);
+                                setTitle("Корзина");
+                                return true;
                         }
                         return false;
                     }
@@ -98,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 "«Тихий Дон» — роман-эпопея Михаила Шолохова в четырёх томах. Одно из наиболее значительных произведений русской литературы XX века, рисующее широкую панораму жизни донского казачества во время Первой мировой войны, революционных событий 1917 года и Гражданской войны в России.", 1928, 410));
         listBooks.add(new Book("А зори здесь тихие", new Author("Васильев", "Борис"),
                 "«А зори здесь тихие…» — произведение, написанное Борисом Васильевым, повествующее о судьбах пяти самоотверженных девушек-зенитчиц и их командира во время Великой Отечественной войны.", 1969, 120));
+    }
+
+    public void startFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
     }
 
     public int getBasketSum() {

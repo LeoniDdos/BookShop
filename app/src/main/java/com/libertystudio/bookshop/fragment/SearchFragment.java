@@ -10,9 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.Book;
@@ -77,9 +74,7 @@ public class SearchFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
 
-                Fragment fragmentBookInfo = new BookInfoFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
+                startFragment(new BookInfoFragment());
                 mainActivity.setTitle("О книге");
             }
         });

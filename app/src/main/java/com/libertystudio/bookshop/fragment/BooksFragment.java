@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.BookAdapter;
@@ -40,9 +37,7 @@ public class BooksFragment extends BaseFragment {
                 mainActivity.setSelectedBook(mainActivity.getListBooks().get(position));
                 mainActivity.setTitle("О книге");
 
-                Fragment fragmentBookInfo = new BookInfoFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.content, fragmentBookInfo).commit();
+                startFragment(new BookInfoFragment());
             }
         });
     }

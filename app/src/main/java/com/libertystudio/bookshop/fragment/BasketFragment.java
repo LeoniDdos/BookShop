@@ -9,9 +9,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.libertystudio.bookshop.MainActivity;
 import com.libertystudio.bookshop.R;
 import com.libertystudio.bookshop.data.BookAdapter;
@@ -51,9 +48,7 @@ public class BasketFragment extends BaseFragment {
 //                tvSum.setText(String.valueOf(mainActivity.getBasketSum()) + " руб.");
 
                 if (mainActivity.getListBasketBooks().size() > 0) {
-                    Fragment fragmentPurchase = new PurchaseFragment();
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.content, fragmentPurchase).commit();
+                    startFragment(new PurchaseFragment());
                     mainActivity.setTitle("Успешная покупка");
                 }
                 else {

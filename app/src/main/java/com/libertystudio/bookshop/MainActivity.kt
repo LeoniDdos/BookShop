@@ -8,6 +8,7 @@ import com.libertystudio.bookshop.entity.Book
 import com.libertystudio.bookshop.fragment.BasketFragment
 import com.libertystudio.bookshop.fragment.BooksFragment
 import com.libertystudio.bookshop.fragment.SearchFragment
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initBottomBar()
+        initToolbar()
 
         setMockBookList()
     }
@@ -50,6 +52,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     return@OnNavigationItemSelectedListener false
                 })
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 
     private fun setMockBookList() {

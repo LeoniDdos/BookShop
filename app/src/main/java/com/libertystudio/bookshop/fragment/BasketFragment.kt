@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.libertystudio.bookshop.MainActivity
 import com.libertystudio.bookshop.R
+import com.libertystudio.bookshop.adapter.BaseAdapterCallback
 import com.libertystudio.bookshop.adapter.BookAdapter
+import com.libertystudio.bookshop.entity.Book
 import kotlinx.android.synthetic.main.fragment_basket.*
 
 class BasketFragment : BaseFragment() {
     private var mainActivity: MainActivity? = null
+
+    private val bookAdapter = BookAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_basket, container, false)
@@ -20,14 +25,30 @@ class BasketFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mainActivity = activity as MainActivity?
+
+        initAdapter()
         initView()
+    }
+
+    private fun initAdapter() {
+        bookAdapter.setDataList(mainActivity!!.listBasketBooks)
+        bookAdapter.callback = object : BaseAdapterCallback<Book> {
+            override fun onItemClick(item: Book) {
+                mainActivity!!.selectedBook = item
+                startFragment(BookInfoFragment())
+            }
+        }
     }
 
     private fun initView() {
         setTitle("Корзина")
 
-        mainActivity = activity as MainActivity?
-        lvBasketBooks?.adapter = BookAdapter(context!!, mainActivity!!.listBasketBooks)
+        rvBasketBooks?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = bookAdapter
+        }
+
         tvBasketSum?.text = mainActivity!!.basketSum.toString() + " руб."
         btnBasketBuy?.setOnClickListener {
 //            Toast.makeText(mainActivity, "Книги успешно куплены", Toast.LENGTH_SHORT).show()

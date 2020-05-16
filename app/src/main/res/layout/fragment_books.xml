@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BooksFragment">
 
-    <ListView
-        android:id="@+id/lvBooks"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBooks"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

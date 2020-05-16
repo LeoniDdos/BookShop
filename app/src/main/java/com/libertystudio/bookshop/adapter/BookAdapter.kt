@@ -1,44 +1,28 @@
 package com.libertystudio.bookshop.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.libertystudio.bookshop.R
 import com.libertystudio.bookshop.entity.Book
-import java.util.*
 
-class BookAdapter(context: Context, private val books: ArrayList<Book>) : BaseAdapter() {
-    override fun getCount(): Int {
-        return books.size
+class BookAdapter : BaseAdapter<Book>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+        return BookViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
     }
 
-    override fun getItem(position: Int): Book {
-        return books[position]
-    }
+    inner class BookViewHolder(itemView: View) : BaseViewHolder<Book>(itemView) {
+        private val tvTitle = itemView.findViewById<TextView>(R.id.textViewTitle)
+        private val tvPrice = itemView.findViewById<TextView>(R.id.textViewPrice)
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+        override fun bind(item: Book) {
+            tvTitle.text = item.title + " (" + item.author.surname + " " + item.author.name.substring(0, 1) + ".)"
+            tvPrice.text = "${item.price} руб."
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var itemView = convertView
-        itemView = itemView ?: inflater!!.inflate(R.layout.list_item, null)
-        val tvTitle = itemView!!.findViewById<TextView>(R.id.textViewTitle)
-        val tvPrice = itemView.findViewById<TextView>(R.id.textViewPrice)
-        val (title, author, _, _, price) = books[position]
-        tvTitle.text = title + " (" + author.surname + " " + author.name.substring(0, 1) + ".)"
-        tvPrice.text = "$price руб."
-        return itemView
-    }
-
-    companion object {
-        private var inflater: LayoutInflater? = null
-    }
-
-    init {
-        inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            itemView.setOnClickListener {
+                callback?.onItemClick(item)
+            }
+        }
     }
 }

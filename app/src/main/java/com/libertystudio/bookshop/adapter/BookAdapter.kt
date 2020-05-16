@@ -21,7 +21,7 @@ class BookAdapter : BaseAdapter<Book>() {
         private val tvPrice = itemView.findViewById<TextView>(R.id.tvBookPrice)
 
         override fun bind(item: Book) {
-            ivImage.showImage(url = "https://cdn1.ozone.ru/multimedia/1022150114.jpg")
+            ivImage.showImage(url = item.image)
             tvTitle.text = item.title + " (" + item.author.surname + " " + item.author.name.substring(0, 1) + ".)"
             tvPrice.text = "${item.price} руб."
 

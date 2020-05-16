@@ -34,8 +34,7 @@ class BooksFragment : BaseFragment() {
         bookAdapter.setDataList(mainActivity!!.listBooks)
         bookAdapter.callback = object : BaseAdapterCallback<Book> {
             override fun onItemClick(item: Book) {
-                mainActivity!!.selectedBook = item
-                startFragment(BookInfoFragment())
+                startFragment(BookInfoFragment.newInstance(item))
             }
         }
     }

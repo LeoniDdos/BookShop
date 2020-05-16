@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     val listBooks = ArrayList<Book>()
     val listBasketBooks = ArrayList<Book>()
-    var selectedBook: Book? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

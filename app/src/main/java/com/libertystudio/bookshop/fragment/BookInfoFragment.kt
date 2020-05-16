@@ -12,7 +12,16 @@ import kotlinx.android.synthetic.main.fragment_book_info.*
 
 class BookInfoFragment : BaseFragment() {
     private var mainActivity: MainActivity? = null
-    private var selectedBook: Book? = null
+    private var currentBook: Book? = null
+
+    companion object {
+        fun newInstance(selectedBook: Book): BookInfoFragment {
+            val fragment = BookInfoFragment()
+            fragment.currentBook = selectedBook
+
+            return fragment
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_book_info, container, false)
@@ -28,16 +37,15 @@ class BookInfoFragment : BaseFragment() {
         setTitle("О книге")
 
         mainActivity = activity as MainActivity?
-        selectedBook = mainActivity!!.selectedBook
 
-        tvBookInfoTitle.text = selectedBook!!.title
-        tvBookInfoAuthor.text = selectedBook!!.author.name + " " + selectedBook!!.author.surname
-        tvBookInfoYear.text = selectedBook!!.year.toString()
-        tvBookInfoDescription.text = selectedBook!!.description
-        tvBookInfoPrice.text = selectedBook!!.price.toString() + " рублей"
+        tvBookInfoTitle.text = currentBook!!.title
+        tvBookInfoAuthor.text = currentBook!!.author.name + " " + currentBook!!.author.surname
+        tvBookInfoYear.text = currentBook!!.year.toString()
+        tvBookInfoDescription.text = currentBook!!.description
+        tvBookInfoPrice.text = currentBook!!.price.toString() + " рублей"
 
         btnBookInfoAddToBasket?.setOnClickListener {
-            mainActivity!!.listBasketBooks.add(mainActivity!!.selectedBook!!)
+            mainActivity!!.listBasketBooks.add(currentBook!!)
             Toast.makeText(mainActivity, "Книга добавлена в корзину", Toast.LENGTH_SHORT).show()
         }
     }

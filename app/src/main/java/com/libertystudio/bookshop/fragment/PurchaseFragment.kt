@@ -22,7 +22,7 @@ class PurchaseFragment : BaseFragment() {
     }
 
     private fun initView() {
-        setTitle("Успешная покупка")
+        setTitle(resources.getString(R.string.fragment_purchase_title))
 
         mainActivity = activity as MainActivity?
 

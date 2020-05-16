@@ -41,7 +41,7 @@ class BasketFragment : BaseFragment() {
     }
 
     private fun initView() {
-        setTitle("Корзина")
+        setTitle(resources.getString(R.string.fragment_basket_title))
 
         rvBasketBooks?.apply {
             layoutManager = LinearLayoutManager(context)

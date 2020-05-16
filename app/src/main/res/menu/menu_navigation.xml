@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_search"
-        android:title="Поиск"
+        android:title="@string/menu_search"
         android:icon="@drawable/ic_action_search" />
     <item
         android:id="@+id/action_home"
-        android:title="Главная"
+        android:title="@string/menu_books"
         android:icon="@drawable/ic_action_home" />
     <item
         android:id="@+id/action_basket"
-        android:title="Корзина"
+        android:title="@string/menu_basket"
         android:icon="@drawable/ic_action_basket" />
 </menu>

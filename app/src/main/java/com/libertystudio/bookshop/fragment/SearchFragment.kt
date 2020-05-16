@@ -40,7 +40,7 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initView() {
-        setTitle("Поиск")
+        setTitle(resources.getString(R.string.fragment_search_title))
 
         rvSearchBooks?.apply {
             layoutManager = LinearLayoutManager(context)

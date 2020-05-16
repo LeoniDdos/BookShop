@@ -34,7 +34,7 @@ class BookInfoFragment : BaseFragment() {
     }
 
     private fun initView() {
-        setTitle("О книге")
+        setTitle(resources.getString(R.string.fragment_book_info_title))
 
         mainActivity = activity as MainActivity?
 

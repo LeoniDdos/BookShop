@@ -40,7 +40,7 @@ class BooksFragment : BaseFragment() {
     }
 
     private fun initView() {
-        setTitle("Книги")
+        setTitle(resources.getString(R.string.fragment_books_title))
 
         rvBooks?.apply {
             layoutManager = LinearLayoutManager(context)

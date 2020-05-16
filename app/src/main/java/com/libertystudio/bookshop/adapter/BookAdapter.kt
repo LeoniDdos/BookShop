@@ -1,15 +1,16 @@
 package com.libertystudio.bookshop.adapter
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.libertystudio.bookshop.R
 import com.libertystudio.bookshop.entity.Book
+import com.libertystudio.bookshop.inflate
 
 class BookAdapter : BaseAdapter<Book>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        return BookViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
+        val view = parent.context.inflate(R.layout.item_book, parent)
+        return BookViewHolder(view)
     }
 
     inner class BookViewHolder(itemView: View) : BaseViewHolder<Book>(itemView) {

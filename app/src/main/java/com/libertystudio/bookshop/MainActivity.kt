@@ -1,6 +1,7 @@
 package com.libertystudio.bookshop
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private val model: MainViewModel by viewModels()
+
     private val fragmentBooks: Fragment = BooksFragment()
     private val fragmentSearch: Fragment = SearchFragment()
     private val fragmentBasket: Fragment = BasketFragment()
@@ -77,8 +80,8 @@ class MainActivity : AppCompatActivity() {
     val basketSum: Int
         get() {
             var sum = 0
-            for ((_, _, _, _, price) in listBasketBooks) {
-                sum += price.toInt()
+            for (itrBook in listBasketBooks) {
+                sum += itrBook.price.toInt()
             }
             return sum
         }
